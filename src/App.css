@@ -11,8 +11,53 @@
 .aboutus,
 .ourservices {
   display: flex;
-  height: 90vh;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+  font-size: 2rem;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container-fluid {
+  background-color: #202124;
+  height: 100vh;
+}
+.devcard{
+  border: 1px solid white;
+  border-radius: 8px;
+  color: white;
+}
+#pfp{
+  width: 200px;
+}
+.socials{
+  width: 80%;
+}
+#carousel {
+  margin: 5% 5%;
+  width: 100%;
+}
+
+body {
+  padding-top: 75px;
+}
+
+#m {
+  color: #44903b;
+}
+
+#e {
+  color: #fd9226;
+}
+
+#r {
+  color: #30b5de;
+}
+
+#n {
+  color: #9bbd4f;
 }
