@@ -8,6 +8,7 @@ import SignInSide from './components/SignInSide';
 import AboutUs from './pages/AboutUs';
 import ourservices from './pages/OurServices';
 import portfolio from './pages/portfolio';
+import SignUp from './components/signup';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/ourservices' component={ourservices} />
           <Route path='/developer' component={portfolio} />
           <Route path='/login' component={SignInSide} />
+          <Route path='/signup' component={SignUp} />
         </Switch>
       </Router>
     </>

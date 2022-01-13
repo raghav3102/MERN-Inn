@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function Homecard() {
   return (
@@ -24,11 +25,13 @@ export default function Homecard() {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions  >
-        <Button className='mx-auto' size='large' variant="contained" color="primary">
-          Sign-Up
-        </Button>
-      </CardActions>
+      <Link to='/signup'>
+        <CardActions  >
+          <Button className='mx-auto' size='large' variant="contained" color="primary">
+            Sign-Up
+          </Button>
+        </CardActions>
+      </Link>
     </Card>
   );
 }
