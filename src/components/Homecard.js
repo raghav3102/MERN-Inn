@@ -1,14 +1,14 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-import { Link } from 'react-router-dom';
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { Button, CardActionArea, CardActions } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function Homecard() {
   return (
-    <Card sx={{ maxWidth: 345 }} >
+    <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -21,13 +21,19 @@ export default function Homecard() {
             MERN Inn.
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Join us today, to avail exciting offers and to continue to booking your first holiday room,<strong> Right Now!</strong>
+            Join us today, to avail exciting offers and to continue to booking
+            your first holiday room,<strong> Right Now!</strong>
           </Typography>
         </CardContent>
       </CardActionArea>
-      <Link to='/signup'>
-        <CardActions  >
-          <Button className='mx-auto' size='large' variant="contained" color="primary">
+      <Link to="/signup">
+        <CardActions>
+          <Button
+            className="mx-auto"
+            size="large"
+            variant="contained"
+            color="primary"
+          >
             Sign-Up
           </Button>
         </CardActions>
