@@ -7,7 +7,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 
 export default function Homecard() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} >
       <CardActionArea>
         <CardMedia
           component="img"
@@ -24,8 +24,8 @@ export default function Homecard() {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size='large' variant="contained" color="primary">
+      <CardActions  >
+        <Button className='mx-auto' size='large' variant="contained" color="primary">
           Sign-Up
         </Button>
       </CardActions>
