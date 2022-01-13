@@ -36,13 +36,13 @@ function Home() {
     <div className="container mt-2 d-flex justify-content-center">
       <h2 ><strong>Or you can chose from our destinations, Inland:</strong></h2>
       <Grid className='mt-3' container spacing={1}>
-        <Grid item md={4} sm={12} xs={12}>
+        <Grid className='mt-4' item md={4} sm={12} xs={12}>
           <Inland title={goaTitle} description={goaDescription} image={goaUrl}></Inland>
         </Grid>
-        <Grid item md={4} sm={12} xs={12}>
+        <Grid className='mt-4' item md={4} sm={12} xs={12}>
           <Inland title={lehTitle} description={lehDescription} image={lehUrl}></Inland>
         </Grid>
-        <Grid item md={4} sm={12} xs={12}>
+        <Grid className='mt-4' item md={4} sm={12} xs={12}>
           <Inland title={jaiTitle} description={jaiDescription} image={jaiUrl}></Inland>
         </Grid>
       </Grid>

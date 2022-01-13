@@ -6,7 +6,7 @@ function CarouselHome() {
             <Carousel fade id='carousel' variant=''>
                 <Carousel.Item>
                     <img
-                        className="d-block "
+                        className="d-block"
                         src="https://source.unsplash.com/1280x400/?bali"
                         alt="First slide"
                     />

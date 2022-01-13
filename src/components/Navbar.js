@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
+import mernicon from '../images/mern_icon.png'
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
@@ -14,11 +15,11 @@ function Navbar() {
   return (
     <div>
       <IconContext.Provider value={{ color: '#fff' }}>
-        <div className='navbar'>
+        <div className='navbar d-flex justify-content-between'>
           <Link to='#' className='menu-bars'>
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
-          <img src="../images/mern_icon.png" alt="" />
+          <img style={{ height: '50px', marginRight: '1.5%' }} src={mernicon} alt="" />
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' onClick={showSidebar}>
