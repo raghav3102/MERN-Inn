@@ -19,7 +19,11 @@ function Navbar() {
           <Link to='#' className='menu-bars'>
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
-          <img style={{ height: '50px', marginRight: '1.5%' }} src={mernicon} alt="" />
+          <div className="logo" style={{marginRight:'1.5%'}}>
+            <Link to='/'>
+              <img style={{ height: '50px'}} src={mernicon} alt="" />
+            </Link>
+          </div>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' onClick={showSidebar}>
