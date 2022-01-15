@@ -6,13 +6,7 @@ import * as SiIcons from "react-icons/si";
 function portfolio() {
   return (
     <>
-      <div className="container-fluid d-flex justify-content-center">
-        {/* <div className="main-card col-lg-8 col-md-8 col-xs-12 col-sm-12">
-                    <h1 className='display-1'>Developer</h1>
-                    <h1 className='display-5'>Vedant Shah</h1>
-                </div>
-                <div className="side-card col-lg-4 col-md-4 col-xs-12 col-sm-12">
-                </div> */}
+      <div className="container-fluid d-flex justify-content-center" id="devcontainer">
         <div className="devcard mx-auto my-auto d-flex align-items-center flex-column p-3 col-md-5 col-sm-8 col-xs-12 text-center">
           <img src={pfp} className="rounded-circle" id="pfp" alt="pfp" />
           <h1 className="mt-4">

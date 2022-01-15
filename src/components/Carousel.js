@@ -3,7 +3,7 @@ import { Carousel } from "react-bootstrap";
 function CarouselHome() {
   return (
     <>
-      <Carousel fade pause="hover" id="carousel" variant="">
+      <Carousel fade pause="hover" className="mb-3" id="carousel" variant="">
         <Carousel.Item>
           <img
             className="d-block w-100"

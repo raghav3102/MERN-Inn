@@ -22,7 +22,7 @@
   flex-direction: column;
 }
 
-.container-fluid {
+#devcontainer{
   background-color: #202124;
   height: 100vh;
 }
@@ -37,10 +37,7 @@
 .socials {
   width: 80%;
 }
-#carousel {
-  margin-bottom: 3%;
-  width: 100%;
-}
+
 
 body {
   padding-top: 75px;
