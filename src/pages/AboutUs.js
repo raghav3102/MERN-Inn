@@ -23,8 +23,8 @@ function AboutUs() {
       <div className='home w-100'>
         <CarouselAbout></CarouselAbout>
       </div>
-      <div className="container mt-2 mb-5 d-flex justify-content-center">
-        <h2><strong>What is <span id="m" className='m-1'>M</span>
+      <div className="container mt-5 mb-5 d-flex justify-content-center">
+        <h2 className='mb-3'><strong>What is <span id="m" className='m-1'>M</span>
           <span id="e" className='m-1'>E</span>
           <span id="r" className='m-1'>R</span>
           <span id="n" className='m-1'>N</span> Inn?</strong></h2>

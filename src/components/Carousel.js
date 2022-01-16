@@ -1,38 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import { Carousel } from "react-bootstrap";
 function CarouselHome() {
+  const [imageLoaded, setImageLoaded] = React.useState(false);
   return (
     <>
-      <Carousel fade pause="hover" className="mb-3" id="carousel" variant="">
+      <Carousel fade pause="hover" id="carousel" variant="">
         <Carousel.Item>
           <img
-            className="d-block w-100"
+            className={`w-100 ${imageLoaded ? 'd-block' : 'd-none'
+              }`}
             src="https://source.unsplash.com/1280x400/?bali"
             alt="First slide"
+            onLoad={() => setImageLoaded(true)}
           />
-          <Carousel.Caption>
-            <p>Bali, Indonesia</p>
+          {!imageLoaded && (
+            <div className="d-flex justify-content-center my-5">
+              <div class="spinner-border text-primary" style={{ height: "3rem", width: "3rem" }} role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
+          <Carousel.Caption className={`${imageLoaded ? 'd-block' : 'd-none'
+            }`} >
+            <p>Bali</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
-            className="d-block w-100"
+            className={`w-100 ${imageLoaded ? 'd-block' : 'd-none'
+              }`}
             src="https://source.unsplash.com/1280x400/?maldives"
-            alt="Second slide"
+            alt="First slide"
+            onLoad={() => setImageLoaded(true)}
           />
-
-          <Carousel.Caption>
+          {!imageLoaded && (
+            <div className="d-flex justify-content-center my-5">
+              <div class="spinner-border text-primary" style={{ height: "3rem", width: "3rem" }} role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
+          <Carousel.Caption className={`${imageLoaded ? 'd-block' : 'd-none'
+            }`} >
             <p>Maldives</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
-            className="d-block w-100"
+            className={`w-100 ${imageLoaded ? 'd-block' : 'd-none'
+              }`}
             src="https://source.unsplash.com/1280x400/?greece"
-            alt="Third slide"
+            alt="First slide"
+            onLoad={() => setImageLoaded(true)}
           />
-
-          <Carousel.Caption>
+          {!imageLoaded && (
+            <div className="d-flex justify-content-center my-5">
+              <div class="spinner-border text-primary" style={{ height: "3rem", width: "3rem" }} role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
+          <Carousel.Caption className={`${imageLoaded ? 'd-block' : 'd-none'
+            }`} >
             <p>Greece</p>
           </Carousel.Caption>
         </Carousel.Item>
