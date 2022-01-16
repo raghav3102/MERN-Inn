@@ -1,11 +1,8 @@
 import React from "react";
-import CarouselHome from "../components/CarouselHome";
+import CarouselHome from "../components/Carousel";
 import Homecard from "../components/Homecard";
 import Inland from "../components/Inland";
 import { Grid } from "@mui/material";
-
-let destinationsForCarousel = ["Bali", "Maldives", "Greece"];
-const urlForCarouselFetch = "https://source.unsplash.com/1280x400/?";
 
 let goaUrl =
   "https://i.pinimg.com/originals/1f/98/f2/1f98f27908696ba7b2c07ec5952dc7ab.jpg";
@@ -28,10 +25,7 @@ function Home() {
   return (
     <>
       <div className="home">
-        <CarouselHome
-          destinationsForCarousel={destinationsForCarousel}
-          urlForCarouselFetch={urlForCarouselFetch}
-        ></CarouselHome>
+        <CarouselHome></CarouselHome>
       </div>
       <div className="container mt-2 ">
         <h2>
@@ -55,16 +49,7 @@ function Home() {
       </div>
       <div className="container  mt-2 ">
         <h2>
-          <strong>
-            New
-            <span id="r" className="m-1">
-              Resorts
-            </span>
-            , New
-            <span id="m" className="m-1">
-              Memories
-            </span>
-          </strong>
+          <strong>New<span id="r" className="m-1">Resorts</span>, New<span id="m" className="m-1">Memories</span></strong>
         </h2>
         <br />
         <p>
@@ -79,13 +64,7 @@ function Home() {
 
       <div className="container mt-2 d-flex justify-content-center">
         <h2>
-          <strong>
-            Or you can chose from our destinations,
-            <span id="n" className="m-1">
-              Inland
-            </span>
-            :
-          </strong>
+          <strong>Or you can chose from our destinations,<span id="n" className="m-1">Inland</span>:</strong>
         </h2>
         <Grid className="mt-md-3" container spacing={1}>
           <Grid className="mt-4" item md={4} sm={12} xs={12}>
