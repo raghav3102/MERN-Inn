@@ -49,7 +49,7 @@ function Home() {
       </div>
       <div className="container  mt-2 ">
         <h2>
-          <strong>New Resorts, New Memories</strong>
+          <strong>New<span id="r" className="m-1">Resorts</span>, New<span id="m" className="m-1">Memories</span></strong>
         </h2>
         <br />
         <p>
@@ -64,7 +64,7 @@ function Home() {
 
       <div className="container mt-2 d-flex justify-content-center">
         <h2>
-          <strong>Or you can chose from our destinations, Inland:</strong>
+          <strong>Or you can chose from our destinations,<span id="n" className="m-1">Inland</span>:</strong>
         </h2>
         <Grid className="mt-md-3" container spacing={1}>
           <Grid className="mt-4" item md={4} sm={12} xs={12}>

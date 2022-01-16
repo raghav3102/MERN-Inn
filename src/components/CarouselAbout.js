@@ -6,21 +6,21 @@ function CarouselAbout() {
             <Carousel fade id='carousel' variant=''>
                 <Carousel.Item>
                     <img
-                        className="d-block"
+                        className="d-block w-100"
                         src="https://source.unsplash.com/1280x400/?hotels"
-                        alt="First slide"
+                        alt="First slide" 
                     />
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
-                        className="d-block "
+                        className="d-block w-100"
                         src="https://source.unsplash.com/1280x400/?hotel"
                         alt="Second slide"
                     />
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
-                        className="d-block "
+                        className="d-block w-100"
                         src="https://source.unsplash.com/1280x400/?resort"
                         alt="Third slide"
                     />

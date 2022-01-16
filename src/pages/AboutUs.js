@@ -20,13 +20,16 @@ let nodeDescription = "Node.js is an open-source, cross-platform, back-end JavaS
 function AboutUs() {
   return (
     <>
-      <div className='home'>
+      <div className='home w-100'>
         <CarouselAbout></CarouselAbout>
       </div>
       <div className="container mt-2 mb-5 d-flex justify-content-center">
-        <h2><strong>What is MERN Inn</strong></h2>
+        <h2><strong>What is <span id="m" className='m-1'>M</span>
+          <span id="e" className='m-1'>E</span>
+          <span id="r" className='m-1'>R</span>
+          <span id="n" className='m-1'>N</span> Inn?</strong></h2>
         <p>MERN Inn is a state of the art, hotel room booking faciltiy, It is a Full Stack Web Development mini projetc. It requires users to sign up/in to continue to booking page, where they can check their previous bookings or book a new room. There is a feature to download the invoice any previous booking as a PDF. The Source code is available on GitHub and can be accessed from the link in the navbar.</p>
-        <h2><strong>Tech Stack Used</strong></h2>
+        <h2><strong>Tech Stack Used:</strong></h2>
         <Grid className='mt-3' container spacing={1}>
           <Grid className='mt-4' item md={3} sm={12} xs={12}>
             <Inland title="MongoDB" description={mongoDescription} image={mongoLogo}></Inland>
