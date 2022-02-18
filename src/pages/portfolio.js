@@ -22,8 +22,9 @@ function portfolio() {
             vedantshah2001@gmail.com
           </Button>
           <div className="socials d-flex mt-4 justify-content-around">
-            <SiIcons.SiLinkedin size="25" />
+            <SiIcons.SiLinkedin style={{ cursor: "pointer" }} onClick={() => { window.open("https://in.linkedin.com/in/vedant-shah-2600731b9") }} size="25" />
             <SiIcons.SiInstagram size="25" />
+            <SiIcons.SiGithub style={{ cursor: "pointer" }} onClick={() => { window.open("https://github.com/vedant-shah") }} size="25" />
             <SiIcons.SiYoutube size="25" />
             <SiIcons.SiSnapchat size="25" />
           </div>

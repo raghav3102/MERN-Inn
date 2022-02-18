@@ -41,7 +41,7 @@ function Navbar() {
                       target="blank"
                     >
                       {item.icon}
-                      <span>{item.title}</span>
+                      <span id='span'>{item.title}</span>
                     </a>
                   </li>
                 );
@@ -50,7 +50,7 @@ function Navbar() {
                   <li key={index} className={item.cName}>
                     <Link to={item.path}>
                       {item.icon}
-                      <span>{item.title}</span>
+                      <span id='span'>{item.title}</span>
                     </Link>
                   </li>
                 );

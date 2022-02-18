@@ -9,6 +9,7 @@ import AboutUs from "./pages/AboutUs";
 import ourservices from "./pages/OurServices";
 import portfolio from "./pages/portfolio";
 import SignUp from "./components/signup";
+import booking from "./pages/booking";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/developer" component={portfolio} />
           <Route path="/login" component={SignInSide} />
           <Route path="/signup" component={SignUp} />
+          <Route path="/booking" component={booking} />
         </Switch>
       </Router>
     </>
