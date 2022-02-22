@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import Bill from '../components/Bill';
 import BookingForm from '../components/BookingForm';
 import Button from '@mui/material/Button';
+import { useForm } from "react-hook-form";
+const { register, handleSubmit, errors } = useForm();
+
 
 function Booking() {
     const [c, setC] = useState(0);
@@ -14,13 +17,13 @@ function Booking() {
     const [days, setDays] = useState('');
     const [destination, setDestination] = useState('Goa');
     let bookingData = {
-        name:  name ,
-        email:  email ,
-        phone:  phone ,
-        rooms:  room ,
-        sdate:  sdate ,
-        edate:  edate ,
-        days:  days ,
+        name: name,
+        email: email,
+        phone: phone,
+        rooms: room,
+        sdate: sdate,
+        edate: edate,
+        days: days,
         destination: destination
     }
     const bbtn = <>
@@ -33,12 +36,15 @@ function Booking() {
     function getCardContent(c) {
         switch (c) {
             case 0:
-                return <BookingForm bookingData={bookingData} setName={setName}  setEmail={setEmail}  setPhone={setPhone}  setDestination={setDestination}  setRoom={setRoom}  setSdate={setSdate}  setEdate={setEdate}  setDays={setDays} />;
+                return <BookingForm bookingData={bookingData} setName={setName} setEmail={setEmail} setPhone={setPhone} setDestination={setDestination} setRoom={setRoom} setSdate={setSdate} setEdate={setEdate} setDays={setDays} register={register} errors={errors} />;
             case 1:
-                return <Bill bookingData={bookingData} setName={setName}  setEmail={setEmail}  setPhone={setPhone}  setDestination={setDestination}  setRoom={setRoom}  setSdate={setSdate}  setEdate={setEdate}  setDays={setDays} />
+                return <Bill bookingData={bookingData} setName={setName} setEmail={setEmail} setPhone={setPhone} setDestination={setDestination} setRoom={setRoom} setSdate={setSdate} setEdate={setEdate} setDays={setDays} />
             default:
                 return "Wrong input";
         }
+    }
+    const onSubmit = (data) => {
+        
     }
     return (
         <>
@@ -47,17 +53,18 @@ function Booking() {
                 <div className="h2 mx-auto">Book your Holiday with us!</div>
                 <hr />
                 <div className="h5 mx-auto" style={{ fontWeight: 'bold' }}>Booking Details:</div>
-                
+                <form className='d-flex flex-column' onSubmit={handleSubmit(onSubmit)}>
                     {getCardContent(c)}
                     <div className="d-flex flex-row">
 
                         {c === 1 ? bbtn : ''}
-                        <Button variant="outlined" id='nextcnfbtn' className='mx-auto' style={{ "width": c === 1 ? "30%" : "60%" }} 
+                        <Button variant="outlined" id='nextcnfbtn' className='mx-auto' style={{ "width": c === 1 ? "30%" : "60%" }}
                             onClick={(c) => {
                                 setC(1);
                             }}
                         >{c === 1 ? "Finish" : "Next"}</Button>
                     </div>
+                </form>
             </div>
         </>
     )

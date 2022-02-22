@@ -9,7 +9,7 @@ import AboutUs from "./pages/AboutUs";
 import ourservices from "./pages/OurServices";
 import portfolio from "./pages/portfolio";
 import SignUp from "./components/signup";
-import booking from "./pages/booking";
+import booking from "./pages/book";
 
 function App() {
   return (
