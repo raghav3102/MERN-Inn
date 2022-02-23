@@ -192,6 +192,8 @@ function Book() {
 
                     placeholder="Enter Check-In and Check-Out dates"
 
+                    delayUpdate={true}
+
                     min={minDate}
 
                     minDays={1}
