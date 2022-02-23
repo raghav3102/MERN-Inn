@@ -18,6 +18,7 @@ function Book() {
     const [days, setDays] = useState(1);
     const [destination, setDestination] = useState('Goa');
     const [total, setTotal] = useState(0);
+    const [drpVal, setDrpVal] = useState((sdate).toString().substring(3, 15) + ' - ' + edate.toString().substring(3, 15));
     const location = [
         {
             value: 'Goa',
@@ -47,6 +48,14 @@ function Book() {
         destination: destination,
         total: total
     }
+    const [isError, setIsError] = useState(true)
+    const [isNameError, setIsNameError] = useState(true);
+    const [isEmailError, setIsEmailError] = useState(true);
+    const [isPhoneError, setIsPhoneError] = useState(true);
+    const [isRoomError, setIsRoomError] = useState(true);
+    const [phoneErrorMessage, setPhoneErrorMessage] = useState('Phone is Required');
+    const [roomErrorMessage, setRoomErrorMessage] = useState('Rooms is Required');
+    const [emailErrorMessage, setEmailErrorMessage] = useState('Email is Required');
     const bbtn = <>
         <Button variant="outlined" id='nextcnfbtn' className='mx-auto' style={{ "width": "30%" }}
             onClick={(c) => {
@@ -56,46 +65,103 @@ function Book() {
     </>
     const minDate = new Date();
     const updateDate = (args) => {
-        setSdate(args.startDate);
-        setEdate(args.endDate);
-        setDays(args.daySpan);
+        if (args.value === null) {
+            setIsError(true);
+        }
+        else {
+            setIsError(false);
+            setDrpVal(args.value);
+            setSdate(args.startDate);
+            setEdate(args.endDate);
+            setDays(args.daySpan);
+        }
     };
     const onSubmit = () => {
         console.log('')
     }
+    const isNameValid = (e) => {
+        if (e === '') {
+            setIsNameError(true);
+            setIsError(true);
+        }
+        else {
+            setIsNameError(false);
+            setIsError(false);
+        }
+    }
+    const isEmailValid = (e) => {
+        if (e === '') {
+            setIsError(true);
+            setIsEmailError(true);
+            setEmailErrorMessage("Email is Required")
+        }
+        else if (e.match(/.+\@.+\..+/)) {
+            setIsEmailError(false);
+            setIsError(false);
+
+        }
+        else {
+            setEmailErrorMessage("Invalid email")
+            setIsEmailError(true);
+            setIsError(true);
+        }
+
+    }
+    const isPhoneValid = (e) => {
+        if (e === '') {
+            setIsPhoneError(true);
+            setPhoneErrorMessage("Phone is Required");
+            setIsError(true);
+        }
+        else if (parseInt(e, 10) < 7000000000 || parseInt(e, 10) > 9999999999) {
+            setIsPhoneError(true);
+            setPhoneErrorMessage("Invalid Phone Number");
+            setIsError(true);
+        }
+        else {
+            setIsPhoneError(false);
+            setIsError(false);
+        }
+    }
+    const isRoomValid = (e) => {
+        if (e === '') {
+            setIsRoomError(true)
+            setRoomErrorMessage("Rooms is Required")
+            setIsError(true);
+        }
+        else if (parseInt(e, 10) < 1) {
+            setIsRoomError(true);
+            setIsError(true);
+            setRoomErrorMessage("Number of rooms cannot be negative")
+        }
+        else {
+            setIsRoomError(false);
+            setIsError(false);
+        }
+    }
+
     const bookingForm = <>
         <form className='d-flex flex-column' onSubmit={onSubmit}>
             {/* Name */}
-            <TextField name="name" required className='my-2 mx-auto' label="Name" variant="standard" style={{ "width": "60%" }} value={name} onChange={(event) => { setName(event.target.value); }}
-            // inputProps={{
-            //     ...register("name", {
-            //         required: "Name is required"
-            //     })
-            // }} 
+            <TextField name="name" required className='my-2 mx-auto' label="Name" variant="standard" style={{ "width": "60%" }} value={name} error={isNameError} helperText={isNameError ? "Name is required" : ""} onChange={(event) => {
+                setName(event.target.value);
+                isNameValid(event.target.value);
+            }}
             />
-            {/* <p>{errors.name?.message}</p> */}
-            {/* //Email */}
-            <TextField name="email" required className='my-2 mx-auto' type='email' label="Email" variant="standard" style={{ "width": "60%" }} value={email} onChange={(event) => { setEmail(event.target.value) }}
-            // inputProps={{
-            //     ...register("email", {
-            //         required: "Email is required",
-            //         pattern: { value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, message: "This is not a valid email." }
-            //     })
-            // }}
-            />
-            {/* <p>{errors.email?.message}</p> */}
 
-            {/* //Phone */}
-            <TextField name="phone" required className='my-2 mx-auto' label="Phone" variant="standard" style={{ "width": "60%" }} value={phone} onChange={(event) => { setPhone(event.target.value) }}
-            // inputProps={{
-            //     ...register("phone", {
-            //         required: "Phone is required"
-            //     })
-            // }}
+            <TextField name="email" required className='my-2 mx-auto' label="Email" variant="standard" style={{ "width": "60%" }} value={email} error={isEmailError} helperText={isEmailError ? emailErrorMessage : ""} onChange={(event) => {
+                setEmail(event.target.value);
+                isEmailValid(event.target.value);
+            }}
             />
-            {/* <p>{errors.phone?.message}</p> */}
 
-            {/* //Destination */}
+            <TextField name="phone" required className='my-2 mx-auto' label="Phone" variant="standard" style={{ "width": "60%" }} value={phone} error={isPhoneError} helperText={isPhoneError ? phoneErrorMessage : ""} onChange={(event) => {
+                setPhone(event.target.value);
+                isPhoneValid(event.target.value);
+
+            }}
+            />
+
             <TextField
                 id="destination"
                 select
@@ -115,16 +181,12 @@ function Book() {
                 ))}
             </TextField>
 
-            {/* //No of rooms */}
-            <TextField name="rooms" className='mx-auto' required label="No. of Rooms" variant="standard" style={{ "width": "60%" }} value={room} onChange={(event) => { setRoom(event.target.value) }}
-                // inputProps={{
-                //     ...register("rooms", {
-                //         required: "No. of Rooms is required", min: { value: 1, message: "You need to book atleast one room." }
-                //     })
-                // }}
+            <TextField name="rooms" className='mx-auto' required label="No. of Rooms" variant="standard" style={{ "width": "60%" }} value={room} error={isRoomError} helperText={isRoomError ? roomErrorMessage : ""} onChange={(event) => {
+                setRoom(event.target.value)
+                isRoomValid(event.target.value);
+            }}
             />
-            {/* <p>{errors.rooms?.message}</p> */}
-            {/* // checkin check out */}
+
             <div className='mx-auto my-4' style={{ "width": "60%" }}>
                 <DateRangePickerComponent
 
@@ -137,6 +199,8 @@ function Book() {
                     format="dd MMM yyyy"
 
                     change={updateDate}
+
+                    value={drpVal}
 
                 />
             </div>
@@ -159,15 +223,17 @@ function Book() {
                 <div className="h2 mx-auto">Book your Holiday with us!</div>
                 <hr />
                 <div className="h5 mx-auto" style={{ fontWeight: 'bold' }}>Booking Details:</div>
-                    {getCardContent(c)}
+                {getCardContent(c)}
                 <div className="d-flex flex-row">
                     {c === 1 ? bbtn : ''}
-                    <Button variant="outlined" id='nextcnfbtn' className='mx-auto' style={{ "width": c === 1 ? "30%" : "60%" }}
+                    <Button variant="outlined" id='nextcnfbtn' className='mx-auto' style={{ "width": c === 1 ? "30%" : "60%" }} disabled={isError}
                         onClick={(c) => {
-                            setC(1);
+                            if (!isError)
+                                setC(1);
                         }}
-                    >{c === 1 ? "Finish" : "Next"}</Button>
+                    >{c === 1 ? "Book!" : "Next"}</Button>
                 </div>
+                <p className='mx-auto' style={{ color: "red", fontSize: "0.8rem" }}>{isError ? "One or more fields are invalid, kindly re-check" : ""}</p>
             </div>
         </>
     )
