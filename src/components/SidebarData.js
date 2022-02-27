@@ -35,6 +35,12 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
+    title: "Book Now!",
+    path: "/booking",
+    icon: <FaIcons.FaUmbrellaBeach />,
+    cName: "nav-text",
+  },
+  {
     title: "Login",
     path: "/login",
     icon: <IoIcons.IoIosLogIn />,

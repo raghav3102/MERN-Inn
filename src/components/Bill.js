@@ -6,9 +6,6 @@ function Bill(props) {
   props.setTotal(getTotal)
   return (
     <>
-      <div className="h2 mx-auto">Book your Holiday with us!</div>
-      <hr />
-      <div className="h5 mx-auto" style={{ fontWeight: 'bold' }}>Booking Details:</div>
       <div className="d-flex flex-column justify-content-between flex-">
         <p className="d-inline-block h6">Name:</p>
         <p className="d-inline-block text-muted">{props.bookingData.name}</p>
