@@ -62,7 +62,7 @@ function Home() {
         </p>
       </div>
 
-      <div className="container mt-2 d-flex justify-content-center">
+      <div className="container flex-column mx-auto mt-2 d-flex justify-content-center">
         <h2>
           <strong>Or you can chose from our destinations,<span id="n" className="m-1">Inland</span>:</strong>
         </h2>
@@ -89,11 +89,11 @@ function Home() {
             ></Inland>
           </Grid>
         </Grid>
+        <div className="homecard d-flex my-4 justify-content-center">
+          <Homecard></Homecard>
+        </div>
       </div>
 
-      <div className="homecard d-flex my-4 justify-content-center">
-        <Homecard></Homecard>
-      </div>
     </>
   );
 }

@@ -143,19 +143,19 @@ function Book() {
     const bookingForm = <>
         <form className='d-flex flex-column' onSubmit={onSubmit}>
             {/* Name */}
-            <TextField name="name" required className='my-2 mx-auto' label="Name" variant="standard" style={{ "width": "60%" }} value={name} error={isNameError} helperText={isNameError ? "Name is required" : ""} onChange={(event) => {
+            <TextField name="name" required className='my-2 mx-auto' label="Name" variant="standard" style={{ "minWidth": "70%" }} value={name} error={isNameError} helperText={isNameError ? "Name is required" : ""} onChange={(event) => {
                 setName(event.target.value);
                 isNameValid(event.target.value);
             }}
             />
 
-            <TextField name="email" required className='my-2 mx-auto' label="Email" variant="standard" style={{ "width": "60%" }} value={email} error={isEmailError} helperText={isEmailError ? emailErrorMessage : ""} onChange={(event) => {
+            <TextField name="email" required className='my-2 mx-auto' label="Email" variant="standard" style={{ "minWidth": "70%" }} value={email} error={isEmailError} helperText={isEmailError ? emailErrorMessage : ""} onChange={(event) => {
                 setEmail(event.target.value);
                 isEmailValid(event.target.value);
             }}
             />
 
-            <TextField name="phone" required className='my-2 mx-auto' label="Phone" variant="standard" style={{ "width": "60%" }} value={phone} error={isPhoneError} helperText={isPhoneError ? phoneErrorMessage : ""} onChange={(event) => {
+            <TextField name="phone" required className='my-2 mx-auto' label="Phone" variant="standard" style={{ "minWidth": "70%" }} value={phone} error={isPhoneError} helperText={isPhoneError ? phoneErrorMessage : ""} onChange={(event) => {
                 setPhone(event.target.value);
                 isPhoneValid(event.target.value);
 
@@ -172,7 +172,7 @@ function Book() {
                     setDestination(event.target.value);
                 }}
                 className='my-4 mx-auto'
-                style={{ "width": "60%" }}
+                style={{ "minWidth": "70%" }}
             >
                 {location.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -181,13 +181,13 @@ function Book() {
                 ))}
             </TextField>
 
-            <TextField name="rooms" className='mx-auto' required label="No. of Rooms" variant="standard" style={{ "width": "60%" }} value={room} error={isRoomError} helperText={isRoomError ? roomErrorMessage : ""} onChange={(event) => {
+            <TextField name="rooms" className='mx-auto' required label="No. of Rooms" variant="standard" style={{ "minWidth": "70%" }} value={room} error={isRoomError} helperText={isRoomError ? roomErrorMessage : ""} onChange={(event) => {
                 setRoom(event.target.value)
                 isRoomValid(event.target.value);
             }}
             />
 
-            <div className='mx-auto my-4' style={{ "width": "60%" }}>
+            <div className='mx-auto my-4' style={{ "minWidth": "70%" }}>
                 <DateRangePickerComponent
 
                     placeholder="Enter Check-In and Check-Out dates"
@@ -220,7 +220,7 @@ function Book() {
     }
     return (
         <>
-            <div className="card mx-auto d-flex mt-5 px-5 py-3 col-md-7 col-sm-9 col-xs-9" >
+            <div className="card mx-auto d-flex mt-5 px-2 py-3 col-md-7 col-sm-12 col-xs-12" >
 
                 <div className="h2 mx-auto">Book your Holiday with us!</div>
                 <hr />
