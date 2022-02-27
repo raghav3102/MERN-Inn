@@ -1,7 +1,9 @@
 import React from 'react'
-
 function Bill(props) {
-  props.setTotal(eval(`${props.bookingData.room} * 1000 * ${props.bookingData.days}`))
+  let getTotal = () => {
+    return props.bookingData.room * 1000 * props.bookingData.days;
+  }
+  props.setTotal(getTotal)
   return (
     <>
       <div className="h2 mx-auto">Book your Holiday with us!</div>
@@ -19,9 +21,9 @@ function Bill(props) {
         <p className="d-inline-block h6">Destination:</p>
         <p className="d-inline-block text-muted">{props.bookingData.destination}</p>
         <p className="d-inline-block h6">Start Date:</p>
-        <p className="d-inline-block text-muted">{(props.bookingData.sdate).toString().substring(0,15)}</p>
+        <p className="d-inline-block text-muted">{(props.bookingData.sdate).toString().substring(0, 15)}</p>
         <p className="d-inline-block h6">End Date:</p>
-        <p className="d-inline-block text-muted">{props.bookingData.edate.toString().substring(0,15)}</p>
+        <p className="d-inline-block text-muted">{props.bookingData.edate.toString().substring(0, 15)}</p>
         <p className="d-inline-block h6">Number of Days:</p>
         <p className="d-inline-block text-muted">{props.bookingData.days}</p>
         <p className="d-inline-block h6"><strong>Final Amount:</strong></p>

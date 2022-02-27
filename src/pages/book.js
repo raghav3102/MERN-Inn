@@ -95,7 +95,7 @@ function Book() {
             setIsEmailError(true);
             setEmailErrorMessage("Email is Required")
         }
-        else if (e.match(/.+\@.+\..+/)) {
+        else if (e.match(/.+@.+\..+/)) {
             setIsEmailError(false);
             setIsError(false);
 
