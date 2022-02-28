@@ -143,19 +143,19 @@ function Book() {
     const bookingForm = <>
         <form className='d-flex flex-column' onSubmit={onSubmit}>
             {/* Name */}
-            <TextField name="name" required className='my-2 mx-auto' label="Name" variant="standard" style={{ "minWidth": "70%" }} value={name} error={isNameError} helperText={isNameError ? "Name is required" : ""} onChange={(event) => {
+            <TextField name="name" required className='my-2 mx-auto' label="Name" variant="outlined" style={{ "minWidth": "70%" }} value={name} error={isNameError} helperText={isNameError ? "Name is required" : ""} onChange={(event) => {
                 setName(event.target.value);
                 isNameValid(event.target.value);
             }}
             />
 
-            <TextField name="email" required className='my-2 mx-auto' label="Email" variant="standard" style={{ "minWidth": "70%" }} value={email} error={isEmailError} helperText={isEmailError ? emailErrorMessage : ""} onChange={(event) => {
+            <TextField name="email" required className='my-2 mx-auto' label="Email" variant="outlined" style={{ "minWidth": "70%" }} value={email} error={isEmailError} helperText={isEmailError ? emailErrorMessage : ""} onChange={(event) => {
                 setEmail(event.target.value);
                 isEmailValid(event.target.value);
             }}
             />
 
-            <TextField name="phone" required className='my-2 mx-auto' label="Phone" variant="standard" style={{ "minWidth": "70%" }} value={phone} error={isPhoneError} helperText={isPhoneError ? phoneErrorMessage : ""} onChange={(event) => {
+            <TextField name="phone" required className='my-2 mx-auto' label="Phone" variant="outlined" style={{ "minWidth": "70%" }} value={phone} error={isPhoneError} helperText={isPhoneError ? phoneErrorMessage : ""} onChange={(event) => {
                 setPhone(event.target.value);
                 isPhoneValid(event.target.value);
 
@@ -181,7 +181,7 @@ function Book() {
                 ))}
             </TextField>
 
-            <TextField name="rooms" className='mx-auto' required label="No. of Rooms" variant="standard" style={{ "minWidth": "70%" }} value={room} error={isRoomError} helperText={isRoomError ? roomErrorMessage : ""} onChange={(event) => {
+            <TextField name="rooms" className='mx-auto' required label="No. of Rooms" variant="outlined" style={{ "minWidth": "70%" }} value={room} error={isRoomError} helperText={isRoomError ? roomErrorMessage : ""} onChange={(event) => {
                 setRoom(event.target.value)
                 isRoomValid(event.target.value);
             }}

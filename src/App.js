@@ -1,4 +1,4 @@
-import React, {createContext, useState} from "react";
+import React, {useState} from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/Navbar";
@@ -51,7 +51,20 @@ function App() {
         "rooms": 3,
         "checkin": "2022-02-27T10:40:54.214Z",
         "checkout": "2022-02-27T10:40:54.214Z",
-        "total": 5000,
+        "total": 3000,
+        "__v": 0
+    },
+    {
+        "_id": "621b55361625c47a5074b059",
+        "user": "6217cd8a0e28e27038bf1ff0",
+        "name": "test test 3",
+        "email": "test2@test.com",
+        "location": "Greece",
+        "phone": 9035642584,
+        "rooms": 3,
+        "checkin": "2022-02-27T10:40:54.214Z",
+        "checkout": "2022-02-27T10:40:54.214Z",
+        "total": 3000,
         "__v": 0
     }
   ]
