@@ -7,18 +7,18 @@ import MenuItem from '@mui/material/MenuItem';
 import Bill from '../components/Bill';
 
 function Book() {
-    // const { register, handleSubmit, errors } = useForm();
+    const host = 'http://localhost:5000';
     const [c, setC] = useState(0);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [room, setRoom] = useState('');
-    const [sdate, setSdate] = useState(new Date());
-    const [edate, setEdate] = useState(new Date());
+    const [checkin, setcheckin] = useState(new Date());
+    const [checkout, setcheckout] = useState(new Date());
     const [days, setDays] = useState(1);
     const [destination, setDestination] = useState('Goa');
     const [total, setTotal] = useState(0);
-    const [drpVal, setDrpVal] = useState((sdate).toString().substring(3, 15) + ' - ' + edate.toString().substring(3, 15));
+    const [drpVal, setDrpVal] = useState((checkin).toString().substring(3, 15) + ' - ' + checkout.toString().substring(3, 15));
     const location = [
         {
             value: 'Goa',
@@ -41,11 +41,11 @@ function Book() {
         name: name,
         email: email,
         phone: phone,
-        room: room,
-        sdate: sdate,
-        edate: edate,
+        rooms: room,
+        checkin: checkin,
+        checkout: checkout,
         days: days,
-        destination: destination,
+        location: destination,
         total: total
     }
     const [isError, setIsError] = useState(true)
@@ -71,9 +71,11 @@ function Book() {
         else {
             setIsError(false);
             setDrpVal(args.value);
-            setSdate(args.startDate);
-            setEdate(args.endDate);
+            setcheckin(args.startDate);
+            setcheckout(args.endDate);
             setDays(args.daySpan);
+            setTotal(bookingData.rooms * 1000 * args.daySpan)
+
         }
     };
     const onSubmit = () => {
@@ -139,7 +141,22 @@ function Book() {
             setIsError(false);
         }
     }
+    let url = `${host}/api/bookings/addbooking`
+    async function postData() {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIxN2NkOGEwZTI4ZTI3MDM4YmYxZmYwIn0sImlhdCI6MTY0NTcyNzExNH0.UrN2hTukNN5uZlT-AckpHANli6x0Gk3pC97NItKnxZs"
+            },
 
+            body: JSON.stringify(bookingData)
+        }).then(console.log("Your Holiday has been successfully booked!"));
+        
+
+
+
+    }
     const bookingForm = <>
         <form className='d-flex flex-column' onSubmit={onSubmit}>
             {/* Name */}
@@ -154,6 +171,7 @@ function Book() {
                 isEmailValid(event.target.value);
             }}
             />
+
 
             <TextField name="phone" required className='my-2 mx-auto' label="Phone" variant="outlined" style={{ "minWidth": "70%" }} value={phone} error={isPhoneError} helperText={isPhoneError ? phoneErrorMessage : ""} onChange={(event) => {
                 setPhone(event.target.value);
@@ -184,6 +202,7 @@ function Book() {
             <TextField name="rooms" className='mx-auto' required label="No. of Rooms" variant="outlined" style={{ "minWidth": "70%" }} value={room} error={isRoomError} helperText={isRoomError ? roomErrorMessage : ""} onChange={(event) => {
                 setRoom(event.target.value)
                 isRoomValid(event.target.value);
+                setTotal(bookingData.room * 1000 * bookingData.days)
             }}
             />
 
@@ -229,9 +248,9 @@ function Book() {
                 <div className="d-flex flex-row">
                     {c === 1 ? bbtn : ''}
                     <Button variant="outlined" id='nextcnfbtn' className='mx-auto' style={{ "width": c === 1 ? "30%" : "60%" }} disabled={isError}
-                        onClick={(c) => {
-                            if (!isError)
-                                setC(1);
+                        onClick={() => {
+                            
+                            c === 1 ? postData() : setC(1);
                         }}
                     >{c === 1 ? "Book!" : "Next"}</Button>
                 </div>
