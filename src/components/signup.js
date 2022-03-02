@@ -33,6 +33,11 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+
+  const [emailIsRepeated, setEmailIsRepeated] = useState(false)
+  const [isPassError, setIsPassError] = useState(true)
+  const [isNameError, setIsNameError] = useState(true)
+  const [isEmailError, setIsEmailError] = useState(true)
   let history = useHistory();
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,7 +56,14 @@ export default function SignUp() {
       history.push('/booking-history')
     }
     else {
-      
+      if (json.error === 'Email already exists') {
+        setEmailIsRepeated(true);
+        setTimeout(() => {
+          setCredentials({ name: credentials.name, email: "", password: credentials.password })
+          setIsEmailError(true)
+          setEmailIsRepeated(false);
+        }, 1500);
+      }
     }
 
   };
@@ -59,6 +71,28 @@ export default function SignUp() {
   const [credentials, setCredentials] = useState({ name: '', email: '', password: '' })
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
+    if (e.target.name === 'password' && e.target.value.length < 5) {
+      setIsPassError(true)
+    }
+    else if (e.target.name === 'password' && e.target.value.length >= 5) {
+      setIsPassError(false)
+    }
+    else if (e.target.name === 'name' && e.target.value.length === 0) {
+      setIsNameError(true)
+    }
+    else if (e.target.name === 'name' && e.target.value.length != 0)
+      setIsNameError(false);
+    else if (e.target.name === 'email' && e.target.value.length === 0) {
+      setIsEmailError(true)
+    }
+    else if (e.target.name === 'email' && e.target.value.length != 0) {
+      if (e.target.value.match(/.+@.+\..+/))
+        setIsEmailError(false)
+      else
+        setIsEmailError(true)
+
+    }
+
   }
   return (
     <ThemeProvider theme={theme}>
@@ -91,6 +125,7 @@ export default function SignUp() {
                   name="name"
                   required
                   fullWidth
+                  error={isNameError}
                   onChange={handleChange}
                   value={credentials.name}
                   id="name"
@@ -106,10 +141,13 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
+                  error={emailIsRepeated || isEmailError}
                   onChange={handleChange}
                   value={credentials.email}
                   autoComplete="email"
                 />
+                <p style={{ display: isEmailError ? 'inline-block' : 'none', color: 'red', fontSize: '0.8rem', margin: '0'}}>Invalid Email.</p>
+                <p style={{ display: emailIsRepeated ? 'inline-block' : 'none', color: 'red', fontSize: '0.8rem', margin: '0' }}>This email already exists.</p>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -119,15 +157,18 @@ export default function SignUp() {
                   onChange={handleChange}
                   label="Password"
                   type="password"
+                  error={isPassError}
                   value={credentials.password}
                   id="password"
                   autoComplete="new-password"
                 />
+                <p style={{ display: isPassError ? 'inline-block' : 'none', color: 'red', fontSize: '0.8rem', margin: '0'  }}>Password must be greater than 5 characters.</p>
               </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
+              disabled={isNameError || isEmailError || isPassError}
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
