@@ -80,9 +80,7 @@ function Book() {
 
         }
     };
-    const onSubmit = () => {
-        console.log('')
-    }
+
     const isNameValid = (e) => {
         if (e === '') {
             setIsNameError(true);
@@ -159,7 +157,7 @@ function Book() {
         });
     }
     const bookingForm = <>
-        <form className='d-flex flex-column' onSubmit={onSubmit}>
+        <form className='d-flex flex-column' >
             {/* Name */}
             <TextField name="name" required className='my-2 mx-auto' label="Name" variant="outlined" style={{ "minWidth": "70%" }} value={name} error={isNameError} helperText={isNameError ? "Name is required" : ""} onChange={(event) => {
                 setName(event.target.value);

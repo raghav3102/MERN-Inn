@@ -18,8 +18,8 @@ const PreviousBookings = () => {
                 <hr />
                 <Grid container spacing={1} className="mx-auto">
                     {bookings.map((booking) => {
-                        return (<Grid item xs={12} md={4} lg={4} >
-                            <PreviousBookingItem key={booking._id} bookingData={booking} />
+                        return (<Grid item xs={12} md={4} lg={4} key={booking._id} >
+                            <PreviousBookingItem  bookingData={booking} />
                         </Grid>)
                     })}
                 </Grid>
