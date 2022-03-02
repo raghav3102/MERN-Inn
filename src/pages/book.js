@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import Button from '@mui/material/Button';
-// import { useForm } from "react-hook-form";
 import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Bill from '../components/Bill';
+import { useHistory } from 'react-router-dom'
+
 
 function Book() {
+    let history = useHistory();
     const host = 'http://localhost:5000';
     const [c, setC] = useState(0);
     const [name, setName] = useState('');
@@ -64,7 +66,7 @@ function Book() {
         >Back</Button>
     </>
     const minDate = new Date();
-    const updateDate = (args) => {
+    const updateDate = async (args) => {
         if (args.value === null) {
             setIsError(true);
         }
@@ -143,7 +145,7 @@ function Book() {
     }
     let url = `${host}/api/bookings/addbooking`
     async function postData() {
-        const response = await fetch(url, {
+        await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -151,11 +153,10 @@ function Book() {
             },
 
             body: JSON.stringify(bookingData)
-        }).then(console.log("Your Holiday has been successfully booked!"));
-        
-
-
-
+        }).then(() => {
+            console.log("Your Holiday has been successfully booked!");
+            history.push('/booking-history');
+        });
     }
     const bookingForm = <>
         <form className='d-flex flex-column' onSubmit={onSubmit}>
@@ -202,7 +203,7 @@ function Book() {
             <TextField name="rooms" className='mx-auto' required label="No. of Rooms" variant="outlined" style={{ "minWidth": "70%" }} value={room} error={isRoomError} helperText={isRoomError ? roomErrorMessage : ""} onChange={(event) => {
                 setRoom(event.target.value)
                 isRoomValid(event.target.value);
-                setTotal(bookingData.room * 1000 * bookingData.days)
+                setTotal(bookingData.rooms * 1000 * bookingData.days)
             }}
             />
 
@@ -249,7 +250,6 @@ function Book() {
                     {c === 1 ? bbtn : ''}
                     <Button variant="outlined" id='nextcnfbtn' className='mx-auto' style={{ "width": c === 1 ? "30%" : "60%" }} disabled={isError}
                         onClick={() => {
-                            
                             c === 1 ? postData() : setC(1);
                         }}
                     >{c === 1 ? "Book!" : "Next"}</Button>

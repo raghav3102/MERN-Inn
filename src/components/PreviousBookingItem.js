@@ -11,7 +11,7 @@ import greece from '../images/greece.jpg'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
+import dateFormat from 'dateformat';
 
 function PreviousBookingItem(props) {
     const style = {
@@ -44,12 +44,11 @@ function PreviousBookingItem(props) {
                         {props.bookingData.location}
                     </p>
                     <p>
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
+                        You booked <strong>{props.bookingData.rooms} rooms </strong>,<br/> Check-In: <strong> {dateFormat(props.bookingData.checkin, "mmmm dS, yyyy")}</strong> <br /> Check-Out: <strong> {dateFormat(props.bookingData.checkout, "mmmm dS, yyyy")}</strong>
                     </p>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" onClick={handleOpen}>Learn More</Button>
+                    <Button size="small" onClick={handleOpen}>Get More Details</Button>
                 </CardActions>
             </Card>
             <Modal
