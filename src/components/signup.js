@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -32,16 +33,33 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  let history = useHistory();
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify(credentials)
+    }
+    );
+    const json = await response.json();
+    if (json.success) {
+      localStorage.setItem('token', json.authtoken);
+      history.push('/booking-history')
+    }
+    else {
+      
+    }
+
   };
 
+  const [credentials, setCredentials] = useState({ name: '', email: '', password: '' })
+  const handleChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value })
+  }
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -67,27 +85,20 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="name"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  onChange={handleChange}
+                  value={credentials.name}
+                  id="name"
+                  label="Full Name"
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
@@ -95,6 +106,8 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
+                  onChange={handleChange}
+                  value={credentials.email}
                   autoComplete="email"
                 />
               </Grid>
@@ -103,8 +116,10 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="password"
+                  onChange={handleChange}
                   label="Password"
                   type="password"
+                  value={credentials.password}
                   id="password"
                   autoComplete="new-password"
                 />

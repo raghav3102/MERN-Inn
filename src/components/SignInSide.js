@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,6 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -30,18 +31,49 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
-
 export default function SignInSide() {
-  const handleSubmit = (event) => {
+
+  const [isError, setIsError] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [credentials, setCredentials] = useState({ email: "", password: "" })
+  let history = useHistory();
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const response = await fetch("http://localhost:5000/api/auth/login", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify(credentials)
+    }
+    );
+    const json = await response.json();
+    if (json.success) {
+      localStorage.setItem('token', json.authtoken);
+      history.push('/booking-history')
+    }
+    else {
+      setF(false);
+      setCredentials({email:"", password:''})
+      setTimeout(() => {
+        setF(true);
+      }, 2000);
+    }
+
   };
 
+  const handleChange = (item) => {
+    setCredentials({ ...credentials, [item.target.name]: item.target.value })
+    if (item.target.name === '') {
+      setIsError(true);
+      setErrorMessage(`${item.target.name} can not be empty`)
+    }
+    else {
+      setIsError(false)
+    }
+  }
+const [f, setF] = useState(true)
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -88,6 +120,10 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
+                error={isError}
+                helperText={isError ? errorMessage : ''}
+                value={credentials.email}
+                onChange={handleChange}
                 id="email"
                 label="Email Address"
                 name="email"
@@ -97,13 +133,18 @@ export default function SignInSide() {
               <TextField
                 margin="normal"
                 required
+                value={credentials.password}
+                onChange={handleChange}
                 fullWidth
                 name="password"
+                error={isError}
+                helperText={isError ? errorMessage : ''}
                 label="Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
               />
+              <p style={{display: !f?'inline-block':'none', color: 'red', fontSize: '0.8rem'}}>Email or Password are incorrect, try again.</p>
               <Button
                 type="submit"
                 fullWidth
@@ -113,14 +154,10 @@ export default function SignInSide() {
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link to="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
+
                 <Grid item>
                   <Link to="/signup" variant="body2">
-                    Sign Up
+                    Don't have an account? Sign-up now.
                   </Link>
                 </Grid>
               </Grid>
