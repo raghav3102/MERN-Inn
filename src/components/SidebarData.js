@@ -23,15 +23,9 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Developer",
-    path: "/developer",
-    icon: <IoIcons.IoMdPeople />,
-    cName: "nav-text",
-  },
-  {
-    title: "Source Code",
-    path: "/sourecode",
-    icon: <IoIcons.IoLogoGithub />,
+    title: "Bookings",
+    path: "/booking-history",
+    icon: <AiIcons.AiOutlineDashboard />,
     cName: "nav-text",
   },
   {
@@ -41,9 +35,15 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Register/Login",
-    path: "/signup",
-    icon: <IoIcons.IoIosLogIn />,
+    title: "Developer",
+    path: "/developer",
+    icon: <IoIcons.IoMdPeople />,
+    cName: "nav-text",
+  },
+  {
+    title: "Source Code",
+    path: "/sourecode",
+    icon: <IoIcons.IoLogoGithub />,
     cName: "nav-text",
   },
 ];

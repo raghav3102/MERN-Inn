@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
+import bookingContext from '../context/bookings/BookingContext';
 
 function Copyright(props) {
   return (
@@ -33,6 +34,8 @@ function Copyright(props) {
 const theme = createTheme();
 export default function SignInSide() {
 
+  const bookingContexts = useContext(bookingContext);
+  const { showAlert } = bookingContexts;
   const [isError, setIsError] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [credentials, setCredentials] = useState({ email: "", password: "" })
@@ -50,12 +53,13 @@ export default function SignInSide() {
     );
     const json = await response.json();
     if (json.success) {
-      localStorage.setItem('token', json.authtoken);
-      history.push('/booking-history')
+      localStorage.setItem('token', json.authToken);
+      history.push('/booking-history');
+      showAlert("Logged In Successfully", "success")
     }
     else {
       setF(false);
-      setCredentials({email:"", password:''})
+      setCredentials({ email: "", password: '' })
       setTimeout(() => {
         setF(true);
       }, 2000);
@@ -73,7 +77,7 @@ export default function SignInSide() {
       setIsError(false)
     }
   }
-const [f, setF] = useState(true)
+  const [f, setF] = useState(true)
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -108,7 +112,7 @@ const [f, setF] = useState(true)
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Log In
             </Typography>
             <Box
               component="form"
@@ -144,7 +148,7 @@ const [f, setF] = useState(true)
                 id="password"
                 autoComplete="current-password"
               />
-              <p style={{display: !f?'inline-block':'none', color: 'red', fontSize: '0.8rem'}}>Email or Password are incorrect, try again.</p>
+              <p style={{ display: !f ? 'inline-block' : 'none', color: 'red', fontSize: '0.8rem' }}>Email or Password are incorrect, try again.</p>
               <Button
                 type="submit"
                 fullWidth
@@ -155,8 +159,8 @@ const [f, setF] = useState(true)
               </Button>
               <Grid container>
 
-                <Grid item>
-                  <Link to="/signup" variant="body2">
+                <Grid item className="mx-auto">
+                  <Link to="/signup" variant="body2" >
                     Don't have an account? Sign-up now.
                   </Link>
                 </Grid>

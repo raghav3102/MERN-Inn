@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import dateFormat from 'dateformat';
+import jsPDF from 'jspdf';
 
 function PreviousBookingItem(props) {
     const style = {
@@ -25,6 +26,21 @@ function PreviousBookingItem(props) {
         boxShadow: 24,
         p: 4,
     };
+    const generateJsPdf = ()=>{
+        let doc = new jsPDF('p', 'pt');
+        doc.text(20, 50, 'MERN Inn.  Invoice   ');
+        doc.text(20, 90, `Booking ID: ${props.bookingData._id}`);
+        doc.text(20, 110, `Name: ${props.bookingData.name}`);
+        doc.text(20, 130, `Email: ${props.bookingData.email}`);
+        doc.text(20, 150, `Phone: ${props.bookingData.phone}`);
+        doc.text(20, 170, `Destination: ${props.bookingData.location}`);
+        doc.text(20, 190, `Rooms: ${props.bookingData.rooms}`);
+        doc.text(20, 210, `Check-In: ${dateFormat(props.bookingData.checkin, "mmmm dS, yyyy")}`);
+        doc.text(20, 230, `Check-Out: ${dateFormat(props.bookingData.checkout, "mmmm dS, yyyy")}`);
+        doc.text(20, 250, `No of Days: ${props.bookingData.days}`);
+        doc.text(20, 270, `Total: ${props.bookingData.total}`);
+        doc.save('Invoice')
+    }
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -39,16 +55,17 @@ function PreviousBookingItem(props) {
                     }
                     alt="Bali"
                 />
-                <CardContent>
+                <CardContent style={{paddingBottom:'0'}}>
                     <p className='h5'>
-                        {props.bookingData.location}
+                        <strong>{props.bookingData.location}</strong>
                     </p>
                     <p>
-                        You booked <strong>{props.bookingData.rooms} rooms </strong>,<br/> Check-In: <strong> {dateFormat(props.bookingData.checkin, "mmmm dS, yyyy")}</strong> <br /> Check-Out: <strong> {dateFormat(props.bookingData.checkout, "mmmm dS, yyyy")}</strong>
+                        You booked <strong>{props.bookingData.rooms} rooms </strong>,<br/> Check-In: <strong> {dateFormat(props.bookingData.checkin, "mmmm dS, yyyy")}</strong> <br /> Check-Out: <strong> {dateFormat(props.bookingData.checkout, "mmmm dS, yyyy")}</strong><br /> Total: <strong>₹ {props.bookingData.total}</strong>
                     </p>
                 </CardContent>
                 <CardActions>
                     <Button size="small" onClick={handleOpen}>Get More Details</Button>
+                    <Button size="small" onClick={generateJsPdf}>Download Invoice</Button>
                 </CardActions>
             </Card>
             <Modal
@@ -74,9 +91,9 @@ function PreviousBookingItem(props) {
                             <p className="d-inline-block text-muted">{props.bookingData.rooms}</p>
                             <p className="d-inline-block h6">Destination:</p>
                             <p className="d-inline-block text-muted">{props.bookingData.location}</p>
-                            <p className="d-inline-block h6">Start Date:</p>
+                            <p className="d-inline-block h6">Check-In:</p>
                             <p className="d-inline-block text-muted">{(props.bookingData.checkin).toString().substring(0, 10)}</p>
-                            <p className="d-inline-block h6">End Date:</p>
+                            <p className="d-inline-block h6">Check-Out:</p>
                             <p className="d-inline-block text-muted">{props.bookingData.checkout.toString().substring(0, 10)}</p>
                             <p className="d-inline-block h6">Number of Days:</p>
                             <p className="d-inline-block text-muted">{props.bookingData.days}</p>

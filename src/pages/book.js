@@ -1,13 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Button from '@mui/material/Button';
 import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Bill from '../components/Bill';
 import { useHistory } from 'react-router-dom'
+import bookingContext from '../context/bookings/BookingContext';
 
 
 function Book() {
+
+    useEffect(() => {
+        if (!localStorage.getItem('token')) {
+            history.push('/login');
+            showAlert("Login to Continue", "danger")
+        }
+    }, [])
+
+    const bookingContexts = useContext(bookingContext);
+    const { showAlert } = bookingContexts;
     let history = useHistory();
     const host = 'http://localhost:5000';
     const [c, setC] = useState(0);
@@ -147,13 +158,14 @@ function Book() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIxN2NkOGEwZTI4ZTI3MDM4YmYxZmYwIn0sImlhdCI6MTY0NTcyNzExNH0.UrN2hTukNN5uZlT-AckpHANli6x0Gk3pC97NItKnxZs"
+                "auth-token": localStorage.getItem('token')
             },
 
             body: JSON.stringify(bookingData)
         }).then(() => {
             console.log("Your Holiday has been successfully booked!");
             history.push('/booking-history');
+            showAlert("Congratulations, your Holiday has been successfully booked!", "success")
         });
     }
     const bookingForm = <>

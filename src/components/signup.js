@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,6 +11,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
+import bookingContext from '../context/bookings/BookingContext';
+
 
 function Copyright(props) {
   return (
@@ -33,7 +35,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-
+  const bookingContexts = useContext(bookingContext);
+  const { showAlert } = bookingContexts;
   const [emailIsRepeated, setEmailIsRepeated] = useState(false)
   const [isPassError, setIsPassError] = useState(true)
   const [isNameError, setIsNameError] = useState(true)
@@ -54,6 +57,7 @@ export default function SignUp() {
     if (json.success) {
       localStorage.setItem('token', json.authtoken);
       history.push('/booking-history')
+      showAlert("Account Created Successfully", "success")
     }
     else {
       if (json.error === 'Email already exists') {
@@ -68,6 +72,8 @@ export default function SignUp() {
 
   };
 
+
+
   const [credentials, setCredentials] = useState({ name: '', email: '', password: '' })
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
@@ -80,12 +86,12 @@ export default function SignUp() {
     else if (e.target.name === 'name' && e.target.value.length === 0) {
       setIsNameError(true)
     }
-    else if (e.target.name === 'name' && e.target.value.length != 0)
+    else if (e.target.name === 'name' && e.target.value.length !== 0)
       setIsNameError(false);
     else if (e.target.name === 'email' && e.target.value.length === 0) {
       setIsEmailError(true)
     }
-    else if (e.target.name === 'email' && e.target.value.length != 0) {
+    else if (e.target.name === 'email' && e.target.value.length !== 0) {
       if (e.target.value.match(/.+@.+\..+/))
         setIsEmailError(false)
       else
@@ -146,7 +152,7 @@ export default function SignUp() {
                   value={credentials.email}
                   autoComplete="email"
                 />
-                <p style={{ display: isEmailError ? 'inline-block' : 'none', color: 'red', fontSize: '0.8rem', margin: '0'}}>Invalid Email.</p>
+                <p style={{ display: isEmailError ? 'inline-block' : 'none', color: 'red', fontSize: '0.8rem', margin: '0' }}>Invalid Email.</p>
                 <p style={{ display: emailIsRepeated ? 'inline-block' : 'none', color: 'red', fontSize: '0.8rem', margin: '0' }}>This email already exists.</p>
               </Grid>
               <Grid item xs={12}>
@@ -162,7 +168,7 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 />
-                <p style={{ display: isPassError ? 'inline-block' : 'none', color: 'red', fontSize: '0.8rem', margin: '0'  }}>Password must be greater than 5 characters.</p>
+                <p style={{ display: isPassError ? 'inline-block' : 'none', color: 'red', fontSize: '0.8rem', margin: '0' }}>Password must be greater than 5 characters.</p>
               </Grid>
             </Grid>
             <Button

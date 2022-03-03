@@ -12,16 +12,29 @@ import SignUp from "./components/signup";
 import booking from "./pages/book";
 import PreviousBookings from "./pages/PreviousBookings";
 import bookingContext from "./context/bookings/BookingContext";
+import Alert from "./components/Alerts";
 
 function App() {
   
   const [bookings, setBookings] = useState([]);
+  const [alert, setAlert] = useState(null)
+
+  const showAlert = (message, type) => {
+    setAlert({
+      type:  type ,
+      message: message
+    }
+    )
+    setTimeout(() => {
+      setAlert(null)
+    }, 1500);
+  }
   async function getBookingHistory() {
     await fetch("http://localhost:5000/api/bookings/fetchallbookings", {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIxN2NkOGEwZTI4ZTI3MDM4YmYxZmYwIn0sImlhdCI6MTY0NTcyNzExNH0.UrN2hTukNN5uZlT-AckpHANli6x0Gk3pC97NItKnxZs"
+        "auth-token": localStorage.getItem('token')
       }
     }).then((response) => {
       return response.json();
@@ -32,9 +45,10 @@ function App() {
   }
   return (
     <>
-      <bookingContext.Provider value={{ bookings, setBookings, getBookingHistory }}>
+      <bookingContext.Provider value={{ bookings, setBookings, getBookingHistory, showAlert }}>
         <Router>
           <Navbar />
+          <Alert alert={alert}/>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route exact path="/aboutus" component={AboutUs} />

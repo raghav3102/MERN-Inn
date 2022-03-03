@@ -27,18 +27,21 @@ function Home() {
       <div className="home">
         <CarouselHome></CarouselHome>
       </div>
-      <div className="container mt-2 ">
+      <div className="container my-4 ">
         <h2>
           <strong>
-            The <span id="m">M</span>
+            Welcome to  <span id="m">M</span>
             <span id="e">E</span>
             <span id="r">R</span>
-            <span id="n">N</span> <span></span> Inn experience
+            <span id="n">N</span> <span></span> Inn! Your Go-To Holiday Booking Service!
           </strong>
         </h2>
         <br />
         <p>
           <strong>
+            MERN Inn is a state of the art, hotel room booking faciltiy, It is a Full Stack Web Development mini project. It requires users to sign up/in to continue to booking page, where they can check their previous bookings or book a new room. There is a feature to download the invoice any previous booking as a PDF. The Source code is available on GitHub and can be accessed from the link in the navbar.
+            <br />
+            <br />
             Access 100+ resorts across India and the world, where a universe of
             experiences opens up for you. Relax by the beach in Bali. Stay in an
             igloo in Maldives. Watch the Northern Lights put up a spectacular

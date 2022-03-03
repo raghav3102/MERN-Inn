@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import "./Navbar.css";
 import { IconContext } from "react-icons";
-import mernicon from "../images/mern_icon.png";
+import Button from '@mui/material/Button';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import bookingContext from '../context/bookings/BookingContext';
+
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
-
+  let history = useHistory();
   const showSidebar = () => setSidebar(!sidebar);
-
+  const bookingContexts = useContext(bookingContext);
+  const { showAlert } = bookingContexts;
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    history.push('/');
+    showAlert("Logged Out Successfully", "success")
+    
+  }
   return (
     <div>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -19,11 +29,14 @@ function Navbar() {
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
-          <div className="logo" style={{marginRight:'1.5%'}}>
-            <Link to='/'>
-              <img style={{ height: '50px'}} src={mernicon} alt="" />
+          {!localStorage.getItem('token') ? <div className="logo" style={{ marginRight: '1.5%' }}>
+            <Link to='/login' style={{ textDecoration: "none" }}>
+              <Button className="mx-2" variant="outlined">Login</Button>
             </Link>
-          </div>
+            <Link to='/signup' style={{ textDecoration: "none" }}>
+              <Button className="mx-2" variant="outlined">Signup</Button>
+            </Link>
+          </div> : <Button className="mx-2" onClick={handleLogout}variant="outlined">Log Out</Button>}
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>
