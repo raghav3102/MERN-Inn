@@ -39,7 +39,7 @@ function PreviousBookingItem(props) {
         doc.text(20, 230, `Check-Out: ${dateFormat(props.bookingData.checkout, "mmmm dS, yyyy")}`);
         doc.text(20, 250, `No of Days: ${props.bookingData.days}`);
         doc.text(20, 270, `Total: ${props.bookingData.total}`);
-        doc.save('Invoice')
+        doc.save(`Invoice-${props.bookingData._id}`)
     }
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);

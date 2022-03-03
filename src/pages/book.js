@@ -86,7 +86,7 @@ function Book() {
             setDrpVal(args.value);
             setcheckin(args.startDate);
             setcheckout(args.endDate);
-            setDays(args.daySpan);
+            setDays(args.daySpan-1);
             setTotal(bookingData.rooms * 1000 * args.daySpan)
 
         }

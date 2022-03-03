@@ -36,7 +36,7 @@ export default function SignInSide() {
 
   const bookingContexts = useContext(bookingContext);
   const { showAlert } = bookingContexts;
-  const [isError, setIsError] = useState(true);
+  const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [credentials, setCredentials] = useState({ email: "", password: "" })
   let history = useHistory();
