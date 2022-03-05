@@ -38,13 +38,15 @@ export default function SignUp() {
   const bookingContexts = useContext(bookingContext);
   const { showAlert } = bookingContexts;
   const [emailIsRepeated, setEmailIsRepeated] = useState(false)
-  const [isPassError, setIsPassError] = useState(true)
-  const [isNameError, setIsNameError] = useState(true)
-  const [isEmailError, setIsEmailError] = useState(true)
+  const [isPassError, setIsPassError] = useState(false)
+  const [isNameError, setIsNameError] = useState(false)
+  const [isEmailError, setIsEmailError] = useState(false)
+  const [error, setError] = useState(true)
+  const host = 'http://localhost:5000';
   let history = useHistory();
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+    const response = await fetch(`${host}/api/auth/createuser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -79,25 +81,41 @@ export default function SignUp() {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
     if (e.target.name === 'password' && e.target.value.length < 5) {
       setIsPassError(true)
+      setError(true)
     }
     else if (e.target.name === 'password' && e.target.value.length >= 5) {
       setIsPassError(false)
     }
-    else if (e.target.name === 'name' && e.target.value.length === 0) {
+    else if (e.target.name === 'name' && e.target.value.length - 1 < 1) {
       setIsNameError(true)
-    }
-    else if (e.target.name === 'name' && e.target.value.length !== 0)
-      setIsNameError(false);
-    else if (e.target.name === 'email' && e.target.value.length === 0) {
-      setIsEmailError(true)
-    }
-    else if (e.target.name === 'email' && e.target.value.length !== 0) {
-      if (e.target.value.match(/.+@.+\..+/))
-        setIsEmailError(false)
-      else
-        setIsEmailError(true)
+      setError(true)
 
     }
+    else if (e.target.name === 'name' && e.target.value.length >= 2) {
+      setIsNameError(false);
+    }
+    else if (e.target.name === 'email' && e.target.value.length === 0) {
+      setIsEmailError(true)
+      setError(true)
+
+    }
+    else if (e.target.name === 'email' && e.target.value.length !== 0) {
+      if (e.target.value.match(/.+@.+\..+/)) {
+        setIsEmailError(false)
+
+      }
+      else {
+        setIsEmailError(true)
+        setError(true)
+
+      }
+    }
+    if (!isNameError && !isEmailError && !isPassError) {
+      if (credentials.name != '' && credentials.email != '' && credentials.password != '')
+        setError(false)
+    }
+    else
+      setError(true)
 
   }
   return (
@@ -168,13 +186,13 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 />
-                <p style={{ display: isPassError ? 'inline-block' : 'none', color: 'red', fontSize: '0.8rem', margin: '0' }}>Password must be greater than 5 characters.</p>
+                <p style={{ display: isPassError ? 'inline-block' : 'none', color: 'red', fontSize: '0.8rem', margin: '0' }}>Password must be atleast 6 characters.</p>
               </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
-              disabled={isNameError || isEmailError || isPassError}
+              disabled={error}
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >

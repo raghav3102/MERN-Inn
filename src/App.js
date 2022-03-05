@@ -18,7 +18,7 @@ function App() {
   
   const [bookings, setBookings] = useState([]);
   const [alert, setAlert] = useState(null)
-
+  const host = 'http://localhost:5000';
   const showAlert = (message, type) => {
     setAlert({
       type:  type ,
@@ -30,7 +30,7 @@ function App() {
     }, 1500);
   }
   async function getBookingHistory() {
-    await fetch("http://localhost:5000/api/bookings/fetchallbookings", {
+    await fetch(`${host}/api/bookings/fetchallbookings`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route exact path="/aboutus" component={AboutUs} />
-            <Route exact path="/ourservices" component={ourservices} />
+            <Route exact path="/facilities" component={ourservices} />
             <Route exact path="/developer" component={portfolio} />
             <Route exact path="/login" component={SignInSide} />
             <Route exact path="/signup" component={SignUp} />

@@ -15,7 +15,7 @@ function Book() {
             history.push('/login');
             showAlert("Login to Continue", "danger")
         }
-    }, [])
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
     const bookingContexts = useContext(bookingContext);
     const { showAlert } = bookingContexts;

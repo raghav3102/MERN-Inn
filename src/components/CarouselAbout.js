@@ -15,8 +15,8 @@ function CarouselAbout() {
                     />
                     {!imageLoaded && (
                         <div className="d-flex justify-content-center my-5">
-                            <div class="spinner-border text-primary" style={{ height: "3rem", width: "3rem" }} role="status">
-                                <span class="visually-hidden">Loading...</span>
+                            <div className="spinner-border text-primary" style={{ height: "3rem", width: "3rem" }} role="status">
+                                <span className="visually-hidden">Loading...</span>
                             </div>
                         </div>
                     )}
@@ -32,8 +32,8 @@ function CarouselAbout() {
                     />
                     {!imageLoaded && (
                         <div className="d-flex justify-content-center my-5">
-                            <div class="spinner-border text-primary" style={{ height: "3rem", width: "3rem" }} role="status">
-                                <span class="visually-hidden">Loading...</span>
+                            <div className="spinner-border text-primary" style={{ height: "3rem", width: "3rem" }} role="status">
+                                <span className="visually-hidden">Loading...</span>
                             </div>
                         </div>
                     )}
@@ -49,8 +49,8 @@ function CarouselAbout() {
                     />
                     {!imageLoaded && (
                         <div className="d-flex justify-content-center my-5">
-                            <div class="spinner-border text-primary" style={{ height: "3rem", width: "3rem" }} role="status">
-                                <span class="visually-hidden">Loading...</span>
+                            <div className="spinner-border text-primary" style={{ height: "3rem", width: "3rem" }} role="status">
+                                <span className="visually-hidden">Loading...</span>
                             </div>
                         </div>
                     )}

@@ -16,7 +16,7 @@ const PreviousBookings = () => {
             history.push('/login');
             showAlert("Login to Continue", "danger")
         }
-    }, [])
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <>

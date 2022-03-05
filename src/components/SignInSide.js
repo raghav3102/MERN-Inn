@@ -34,6 +34,7 @@ function Copyright(props) {
 const theme = createTheme();
 export default function SignInSide() {
 
+  const host = 'http://localhost:5000'
   const bookingContexts = useContext(bookingContext);
   const { showAlert } = bookingContexts;
   const [isError, setIsError] = useState(false);
@@ -42,7 +43,7 @@ export default function SignInSide() {
   let history = useHistory();
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/login", {
+    const response = await fetch(`${host}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

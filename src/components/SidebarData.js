@@ -2,7 +2,7 @@ import React from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
-
+import * as CgIcons from "react-icons/cg";
 export const SidebarData = [
   {
     title: "Home",
@@ -17,9 +17,9 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Our Services",
-    path: "/ourservices",
-    icon: <FaIcons.FaCartPlus />,
+    title: "Facilities",
+    path: "/facilities",
+    icon: <CgIcons.CgGym />,
     cName: "nav-text",
   },
   {
