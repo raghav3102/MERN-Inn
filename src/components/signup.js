@@ -111,7 +111,7 @@ export default function SignUp() {
       }
     }
     if (!isNameError && !isEmailError && !isPassError) {
-      if (credentials.name != '' && credentials.email != '' && credentials.password != '')
+      if (credentials.name !== '' && credentials.email !== '' && credentials.password !== '')
         setError(false)
     }
     else
