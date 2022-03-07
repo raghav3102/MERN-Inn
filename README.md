@@ -2,7 +2,7 @@
 
 Welcome to MERN Inn, a hotel management project!  
   
-MERN Inn is a state of the art, mobile friendly hotel room booking faciltiy, It is a Full Stack Web Development mini project. It requires users to sign up/in to continue to booking page, where they can check their previous bookings or book a new holiday. There is a feature to download the invoice any previous booking as a PDF.
+MERN Inn is a state of the art, mobile friendly hotel room booking faciltiy, It is a Full Stack Web Development project. It requires users to sign up/in to continue to booking page, where they can check their previous bookings or book a new holiday. There is a feature to download the invoice any previous booking as a PDF.
 
 ## Deployment
 https://mern-inn.herokuapp.com/
