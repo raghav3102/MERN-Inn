@@ -32,8 +32,4 @@ and other themeing engines.
 ![homepage](https://user-images.githubusercontent.com/87229097/156913677-6c0ce4cb-a086-4a89-8625-90d0cb38cb6c.png)
 ### Booking-dashboard-page:
 ![homepage](https://user-images.githubusercontent.com/87229097/156913667-7772c8ea-ad1d-48e4-a8b3-d85cf716679b.png)
-### Developer-page:
-![homepage](https://user-images.githubusercontent.com/87229097/156913670-824378f5-789c-477d-a494-4b60914d2e27.png)
-## Developed by:  
-#### Vedant Shah  
-###### Honorary Mention: Paraj Shah
+
